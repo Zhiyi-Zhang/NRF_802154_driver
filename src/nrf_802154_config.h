@@ -35,7 +35,7 @@
 #include NRF_802154_PROJECT_CONFIG
 #endif
 
-#include <nrf.h>
+#include "nrf.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -202,9 +202,9 @@ extern "C" {
  *       copy are available.
  *
  */
-#ifndef NRF_802154_USE_RAW_API
-#define NRF_802154_USE_RAW_API 1
-#endif
+// #ifndef NRF_802154_USE_RAW_API
+// #define NRF_802154_USE_RAW_API 1
+// #endif
 
 /**
  * @def NRF_802154_PENDING_SHORT_ADDRESSES

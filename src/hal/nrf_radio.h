@@ -45,7 +45,7 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
-#include "nrf.h"
+#include "../nrf.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -774,4 +774,3 @@ __STATIC_INLINE void nrf_radio_power_set(bool radio_power)
 #endif
 
 #endif /* NRF_RADIO_H__ */
-

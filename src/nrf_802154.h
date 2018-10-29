@@ -168,7 +168,7 @@ void nrf_802154_fem_control_cfg_get(nrf_802154_fem_control_cfg_t * p_cfg);
 
 
 /**
- * @} 
+ * @}
  * @defgroup nrf_802154_addresses Setting addresses and PAN ID of the device
  * @{
  */
@@ -294,7 +294,7 @@ bool nrf_802154_receive(void);
 /**
  * @brief Change radio state to transmit.
  *
- * @note If the CPU is halted or interrupted while this function is executed, 
+ * @note If the CPU is halted or interrupted while this function is executed,
  *       @ref nrf_802154_transmitted or @ref nrf_802154_transmit_failed may be called before this
  *       function returns a result.
  * @note This function is implemented in zero-copy fashion. It passes the given buffer pointer to
@@ -334,7 +334,7 @@ bool nrf_802154_transmit_raw(const uint8_t * p_data, bool cca);
 /**
  * @brief Change radio state to transmit.
  *
- * @note If the CPU is halted or interrupted while this function is executed, 
+ * @note If the CPU is halted or interrupted while this function is executed,
  *       @ref nrf_802154_transmitted or @ref nrf_802154_transmit_failed must be called before this
  *       function returns a result.
  * @note This function copies the given buffer. It maintains an internal buffer, which is used to
@@ -521,7 +521,6 @@ extern void nrf_802154_received_timestamp_raw(uint8_t * p_data,
                                               int8_t    power,
                                               uint8_t   lqi,
                                               uint32_t  time);
-
 #else // NRF_802154_USE_RAW_API
 
 /**
@@ -550,6 +549,7 @@ extern void nrf_802154_received_timestamp_raw(uint8_t * p_data,
  */
 extern void nrf_802154_received(uint8_t * p_data, uint8_t length, int8_t power, uint8_t lqi);
 
+
 /**
  * @brief Notify that a frame was received at a given time.
  *
@@ -573,6 +573,7 @@ extern void nrf_802154_received_timestamp(uint8_t * p_data,
                                           uint8_t   lqi,
                                           uint32_t  time);
 
+// __WEAK extern
 #endif // !NRF_802154_USE_RAW_API
 
 /**
@@ -586,7 +587,7 @@ extern void nrf_802154_receive_failed(nrf_802154_rx_error_t error);
  * @brief Notify that transmitting a frame has started.
  *
  * @note Usually, @ref nrf_802154_transmitted is called shortly after this function.
- *       However, if the transmit procedure is interrupted, it might happen that 
+ *       However, if the transmit procedure is interrupted, it might happen that
  *       @ref nrf_802154_transmitted is not called.
  * @note This function should be very short to prevent dropping frames by the driver.
  *
@@ -1063,9 +1064,9 @@ void nrf_802154_transmit_csma_ca(const uint8_t * p_data, uint8_t length);
 
 /**
  * @brief Set timeout for the ACK timeout feature.
- * 
+ *
  * A timeout is notified by @ref nrf_802154_transmit_failed.
- * 
+ *
  * @param[in]  time  Timeout in us.
  *                   A default value is defined in nrf_802154_config.h.
  */

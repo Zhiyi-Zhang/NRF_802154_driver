@@ -40,6 +40,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
+#include <stdio.h>
 
 #include "nrf_802154.h"
 #include "nrf_802154_ack_pending_bit.h"
@@ -762,6 +763,8 @@ static void ppis_for_egu_and_ramp_up_set(nrf_radio_task_t ramp_up_task, bool sel
 static void fem_for_lna_set(nrf_timer_cc_channel_t cc_channel,
                             nrf_timer_short_mask_t short_mask)
 {
+  printf("cc_channel: %d\n", cc_channel);
+  printf("short_mask: %d\n", short_mask);
     nrf_fem_control_ppi_enable(NRF_FEM_CONTROL_LNA_PIN, cc_channel);
     nrf_fem_control_timer_set(NRF_FEM_CONTROL_LNA_PIN, cc_channel, short_mask);
     nrf_fem_control_ppi_task_setup(NRF_FEM_CONTROL_LNA_PIN,
@@ -780,6 +783,7 @@ static void fem_for_lna_set(nrf_timer_cc_channel_t cc_channel,
  */
 static void fem_for_lna_reset(nrf_timer_short_mask_t timer_short_mask)
 {
+  printf("timer_short_mask: %d\n", timer_short_mask);
     nrf_fem_control_ppi_disable(NRF_FEM_CONTROL_LNA_PIN);
     nrf_fem_control_timer_reset(NRF_FEM_CONTROL_LNA_PIN, timer_short_mask);
     nrf_ppi_channel_disable(PPI_EGU_TIMER_START);
@@ -1090,7 +1094,7 @@ static void rx_ack_terminate(void)
         nrf_radio_int_disable(NRF_RADIO_INT_END_MASK);
         nrf_radio_shorts_set(SHORTS_IDLE);
         nrf_radio_task_trigger(NRF_RADIO_TASK_DISABLE);
-        
+
         ack_matching_disable();
     }
 }
@@ -1153,7 +1157,7 @@ static void continuous_carrier_terminate(void)
  *
  * This function is called when MAC layer requests transition to another operation.
  *
- * After calling this function RADIO should enter DISABLED state and Radio Scheduler 
+ * After calling this function RADIO should enter DISABLED state and Radio Scheduler
  * should be in continuous mode.
  *
  * @param[in]  term_lvl      Termination level of this request. Selects procedures to abort.
@@ -2677,10 +2681,10 @@ void nrf_802154_core_deinit(void)
     {
         nrf_radio_reset();
     }
-    
+
     nrf_fem_control_pin_clear();
     nrf_fem_control_deactivate();
-    
+
     irq_deinit();
 }
 
